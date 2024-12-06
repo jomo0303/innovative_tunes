@@ -399,8 +399,8 @@ async function getAuthKey() {
   let token
   const response = await axios.post("https://accounts.spotify.com/api/token",
     {
-      client_id: "a81e6bf18f234db29ccf41331f039e9c",
-      client_secret: "cf99a5819d714dcab87e0bbf8abe09c3",
+      client_id: "dbe0ec82c4f64e94b44312414026d161",
+      client_secret: "2272f68052b342f583f89e877525d0c5",
       grant_type: "client_credentials"
     },
     {
