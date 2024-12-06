@@ -17,13 +17,17 @@ function MainMenu(props) {
   const [playerName, setPlayerName] = useState("")
 
   function updatePlayerName(e){
-    setPlayerName(e.target.value)
+    if(e.target.value !== ""){
+      setPlayerName(e.target.value)
+    }
   }
 
   function handleClick() {
-    getJSON().then(response => setArtistList(response.ID))
-    setStarted(true)
-    getJSON().then(response => setArtistList(response.ID))
+    if(playerName !== ""){
+      getJSON().then(response => setArtistList(response.ID))
+      setStarted(true)
+      getJSON().then(response => setArtistList(response.ID))
+    }
   }
   function changeStyle() {
     if (style === 1) {
