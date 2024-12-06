@@ -78,6 +78,7 @@ function App(props){
   function restart(){
     setLives(5)
     setScore(0)
+    insertScore(playerName, score).then(Response => setRank(Response.data.rank)).catch(err => console.log(err))
     loadTopTracks()
   }
 
@@ -769,27 +770,106 @@ let rowOne = (<tr className={tableHeaderStyle}>
   <td >Player</td>
   <td >Score</td>
 </tr>)
-let rowTwo = (<tr className={rowStyle}>
-  <td className={columnStyle}>{props.highScores[0].rank}</td>
-  <td className={columnStyle}>{props.highScores[0].player_name}</td>
-  <td className={columnStyle}>{props.highScores[0].score}</td>
-</tr>)
-let rowThree = (<tr className={rowStyle}>
-  <td className={columnStyle}>{props.highScores[1].rank}</td>
-  <td className={columnStyle}>{props.highScores[1].player_name}</td>
-  <td className={columnStyle}>{props.highScores[1].score}</td>
-</tr>)
-let rowFour = (<tr className={rowStyle}>
-  <td className={columnStyle}>{props.highScores[2].rank}</td>
-  <td className={columnStyle}>{props.highScores[2].player_name}</td>
-  <td className={columnStyle}>{props.highScores[2].score}</td>
-</tr>
-)
-let rowFive = (<tr className={rowStyle}>
-  <td className={displayStyle}>{props.rank}</td>
-  <td className={displayStyle}>{props.playerName}</td>
-  <td className={displayStyle}>{props.score}</td>
-</tr>)
+
+let rowTwo, rowThree, rowFour, rowFive
+
+if (props.score > props.highScores[0].score)
+{
+  rowTwo = (<tr className={rowStyle}>
+    <td className={displayStyle}>1</td>
+    <td className={displayStyle}>{props.playerName}</td>
+    <td className={displayStyle}>{props.score}</td>
+  </tr>)
+  rowThree = (<tr className={rowStyle}>
+    <td className={columnStyle}>{props.highScores[0].rank + 1}</td>
+    <td className={columnStyle}>{props.highScores[0].player_name}</td>
+    <td className={columnStyle}>{props.highScores[0].score}</td>
+  </tr>)
+  rowFour = (<tr className={rowStyle}>
+    <td className={columnStyle}>{props.highScores[1].rank + 1}</td>
+    <td className={columnStyle}>{props.highScores[1].player_name}</td>
+    <td className={columnStyle}>{props.highScores[1].score}</td>
+  </tr>
+  )
+  rowFive = (<tr className={rowStyle}>
+    <td className={columnStyle}>{props.highScores[2].rank + 1}</td>
+    <td className={columnStyle}>{props.highScores[2].player_name}</td>
+    <td className={columnStyle}>{props.highScores[2].score}</td>
+  </tr>)
+}
+else if (props.score > props.highScores[1].score)
+{
+  rowTwo = (<tr className={rowStyle}>
+    <td className={columnStyle}>{props.highScores[0].rank}</td>
+    <td className={columnStyle}>{props.highScores[0].player_name}</td>
+    <td className={columnStyle}>{props.highScores[0].score}</td>
+  </tr>)
+  rowThree = (<tr className={rowStyle}>
+    <td className={displayStyle}>2</td>
+    <td className={displayStyle}>{props.playerName}</td>
+    <td className={displayStyle}>{props.score}</td>
+  </tr>)
+  rowFour = (<tr className={rowStyle}>
+    <td className={columnStyle}>{props.highScores[1].rank + 1}</td>
+    <td className={columnStyle}>{props.highScores[1].player_name}</td>
+    <td className={columnStyle}>{props.highScores[1].score}</td>
+  </tr>
+  )
+  rowFive = (<tr className={rowStyle}>
+    <td className={columnStyle}>{props.highScores[2].rank + 1}</td>
+    <td className={columnStyle}>{props.highScores[2].player_name}</td>
+    <td className={columnStyle}>{props.highScores[2].score}</td>
+  </tr>)
+}
+else if (props.score > props.highScores[2].score)
+{
+  rowTwo = (<tr className={rowStyle}>
+    <td className={columnStyle}>{props.highScores[0].rank}</td>
+    <td className={columnStyle}>{props.highScores[0].player_name}</td>
+    <td className={columnStyle}>{props.highScores[0].score}</td>
+  </tr>)
+  rowThree = (<tr className={rowStyle}>
+    <td className={columnStyle}>{props.highScores[1].rank}</td>
+    <td className={columnStyle}>{props.highScores[1].player_name}</td>
+    <td className={columnStyle}>{props.highScores[1].score}</td>
+  </tr>)
+  rowFour = (<tr className={rowStyle}>
+    <td className={displayStyle}>3</td>
+    <td className={displayStyle}>{props.playerName}</td>
+    <td className={displayStyle}>{props.score}</td>
+  </tr>
+  )
+  rowFive = (<tr className={rowStyle}>
+    <td className={columnStyle}>{props.highScores[2].rank + 1}</td>
+    <td className={columnStyle}>{props.highScores[2].player_name}</td>
+    <td className={columnStyle}>{props.highScores[2].score}</td>
+  </tr>)
+}
+else 
+{
+  rowTwo = (<tr className={rowStyle}>
+    <td className={columnStyle}>{props.highScores[0].rank}</td>
+    <td className={columnStyle}>{props.highScores[0].player_name}</td>
+    <td className={columnStyle}>{props.highScores[0].score}</td>
+  </tr>)
+  rowThree = (<tr className={rowStyle}>
+    <td className={columnStyle}>{props.highScores[1].rank}</td>
+    <td className={columnStyle}>{props.highScores[1].player_name}</td>
+    <td className={columnStyle}>{props.highScores[1].score}</td>
+  </tr>)
+  rowFour = (<tr className={rowStyle}>
+    <td className={columnStyle}>{props.highScores[2].rank}</td>
+    <td className={columnStyle}>{props.highScores[2].player_name}</td>
+    <td className={columnStyle}>{props.highScores[2].score}</td>
+  </tr>
+  )
+  rowFive = (<tr className={rowStyle}>
+    <td className={displayStyle}>{props.rank}</td>
+    <td className={displayStyle}>{props.playerName}</td>
+    <td className={displayStyle}>{props.score}</td>
+  </tr>)
+}
+
   return (
     <div className={bodyStyle}>
       <table className={tableStyle}>
